@@ -60,7 +60,11 @@ public class RegisterPage extends BaseMethods {
         driver.findElement(By.id(":r6:")).click();
         return this;
     }
-
+    @Step("Göz ikonuna tıklanarak şifrenin görünürlüğü test edilir.")
+    public RegisterPage clickPasswordEyeIcon() {
+        driver.findElement(By.cssSelector("[class='iconify iconify--solar mnl__icon__root MuiBox-root css-cnvj7y']")).click();
+        return this;
+    }
     @Step("'Giriş Yap' butonuna tıklanarak, ilgili sayfaya yönlendirme yapıp yapmadığı kontrol edilir.")
     public RegisterPage clickLoginButton() {
         driver.findElement(By.cssSelector("[class='MuiTypography-root MuiTypography-subtitle2 MuiLink-root MuiLink-underlineHover css-z8j0pw']")).click();
@@ -88,6 +92,16 @@ public class RegisterPage extends BaseMethods {
     @Step("Varolan  bir kullanıcı ile kayıt olma işlemi yapıldığında hata alınır.")
     public String getExistingUserErrorMessage() {
         String text = driver.findElement(By.cssSelector("[class='MuiAlert-message css-1xsto0d']")).getText();
+        return text;
+    }
+    @Step("Şifre 6 karakterden daha az girilir ise hata alınır.")
+    public String getPasswordError() {
+        String text = driver.findElement(By.id(":r4:-helper-text")).getText();
+        return text;
+    }
+    @Step("Telefon numarası hatalı formatta girilir ise hata alınır.")
+    public String getPhoneNumberError() {
+        String text = driver.findElement(By.id(":r3:-helper-text")).getText();
         return text;
     }
 }
