@@ -30,6 +30,7 @@ public class RegisterTests extends BaseMethods {
         registerPage.clickLoginButton();
         baseTests.sleep(3000);
         baseTests.assertEquals(driver.getCurrentUrl(), "https://qrsofra.com/auth/jwt/sign-in");
+        baseTests.sleep(3000);
     }
     @Test(description = "TC003 - Şifre alanındaki göz ikonuna tıklanınca şifrenin görünürlüğünün değişip değişmediği test edilir.")
     public void PasswordVisibleIconCheck() {
@@ -171,7 +172,7 @@ public class RegisterTests extends BaseMethods {
         baseTests.sleep(3000);
         baseTests.assertEquals(registerPage.getRepeatPasswordError(), "Şifreyi tekrar giriniz!");
     }
-    @Test(description = "TC0013 - E-posta alanına emoji ve özel semboller girildiğinde sistemin geçersiz e-mail uyarısı vermesi test edilir.")
+    @Test(description = "TC013 - Rıza metni ve hizmet şartları alanının seçilmemesi durumunda alınacak hata test edilir.")
     public void EmptyPoliciesCheck() {
         registerPage.sendKeysRegisterName(registerName)
                 .sendKeysRegisterSurname(registerSurname)
@@ -195,7 +196,7 @@ public class RegisterTests extends BaseMethods {
         baseTests.assertEquals(registerPage.getSurnameErrorMessage(), "Soyisim alanı zorunludur!");
         baseTests.assertEquals(registerPage.getPoliciesError(), "Hizmet Şartlarını ve Gizlilik Politikasını kabul etmelisiniz.");
     }
-    @Test(description = "TC011 - Şifrenin en az 6 karakter olma kuralı test edilir.")
+    @Test(description = "TC011 - Şifre tekrar girildiğinde input'un üstündeki labelda yazan text test edilir.")
     //alttaki test case'inde bug bulunmuştur. bu nedenle test fail vermektedir.
     public void EmptyPasswordRepeatInputErrorCheck() {
         registerPage.sendKeysRegisterName(registerName)

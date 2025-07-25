@@ -37,7 +37,7 @@ public class RegisterPage extends BaseMethods {
         return this;
     }
 
-    @Step("Üyelik kaydı için şifre alanı doldurulur.")
+    @Step("Üyelik kaydı için şifre alanı tekrar doldurulur.")
     public RegisterPage sendKeysRegisterRepeatPassword(String text) {
         driver.findElement(By.id(":r5:")).sendKeys(text);
         return this;
@@ -68,55 +68,65 @@ public class RegisterPage extends BaseMethods {
     @Step("'Giriş Yap' butonuna tıklanarak, ilgili sayfaya yönlendirme yapıp yapmadığı kontrol edilir.")
     public RegisterPage clickLoginButton() {
         driver.findElement(By.cssSelector("[class='MuiTypography-root MuiTypography-subtitle2 MuiLink-root MuiLink-underlineHover css-z8j0pw']")).click();
+        screenshot();
         return this;
     }
 
     @Step("Üyelik kaydı için isim alanı boş bırakıldığında hata alınır.")
     public String getNameErrorMessage() {
         String text = driver.findElement(By.id(":r0:-helper-text")).getText();
+        screenshot();
         return text;
     }
 
     @Step("Üyelik kaydı için soyisim alanı boş bırakıldığında hata alınır.")
     public String getSurnameErrorMessage() {
         String text = driver.findElement(By.id(":r1:-helper-text")).getText();
+        screenshot();
         return text;
     }
 
     @Step("Üyelik kaydı için geçersiz e-mail girildiğinde hata alınır.")
     public String getEmailErrorMessage() {
         String text = driver.findElement(By.id(":r2:-helper-text")).getText();
+        screenshot();
         return text;
     }
 
     @Step("Varolan  bir kullanıcı ile kayıt olma işlemi yapıldığında hata alınır.")
     public String getExistingUserErrorMessage() {
         String text = driver.findElement(By.cssSelector("[class='MuiAlert-message css-1xsto0d']")).getText();
+        screenshot();
         return text;
     }
     @Step("Şifre 6 karakterden daha az girilir ise hata alınır.")
     public String getPasswordError() {
         String text = driver.findElement(By.id(":r4:-helper-text")).getText();
+        screenshot();
         return text;
     }
     @Step("Şifre tekrar girilmediğinde hata alınır.")
     public String getRepeatPasswordError() {
         String text = driver.findElement(By.id(":r5:-helper-text")).getText();
+        screenshot();
         return text;
     }
     @Step("Telefon numarası hatalı formatta girilir ise hata alınır.")
     public String getPhoneNumberError() {
         String text = driver.findElement(By.id(":r3:-helper-text")).getText();
+        screenshot();
         return text;
     }
     @Step("Rıza metni ve hizmet şartları alanı doldurulmadığında hata alınır.")
     public String getPoliciesError() {
         String text = driver.findElement(By.cssSelector("[class='MuiFormHelperText-root Mui-error css-lriew9']")).getText();
+        screenshot();
         return text;
     }
     @Step("Şifre tekrar alanı boş bırakılır ise inputun üstteki label'i 'Şifre' olarak kalmalıdır. Farklı bir metin olur ise hata alınır.")
     public String getInputLabelError() {
         String text = driver.findElement(By.id(":r5:-label")).getText();
+        screenshot();
         return text;
     }
 }
