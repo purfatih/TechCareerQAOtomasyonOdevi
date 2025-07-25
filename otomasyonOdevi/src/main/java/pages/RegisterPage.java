@@ -4,7 +4,6 @@ import base.BaseMethods;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
-
 public class RegisterPage extends BaseMethods {
 
     @Step("Üyelik kaydı için isim alanı doldurulur.")
@@ -61,15 +60,34 @@ public class RegisterPage extends BaseMethods {
         driver.findElement(By.id(":r6:")).click();
         return this;
     }
+
     @Step("'Giriş Yap' butonuna tıklanarak, ilgili sayfaya yönlendirme yapıp yapmadığı kontrol edilir.")
     public RegisterPage clickLoginButton() {
         driver.findElement(By.cssSelector("[class='MuiTypography-root MuiTypography-subtitle2 MuiLink-root MuiLink-underlineHover css-z8j0pw']")).click();
         return this;
     }
+
+    @Step("Üyelik kaydı için isim alanı boş bırakıldığında hata alınır.")
+    public String getNameErrorMessage() {
+        String text = driver.findElement(By.id(":r0:-helper-text")).getText();
+        return text;
+    }
+
+    @Step("Üyelik kaydı için soyisim alanı boş bırakıldığında hata alınır.")
+    public String getSurnameErrorMessage() {
+        String text = driver.findElement(By.id(":r1:-helper-text")).getText();
+        return text;
+    }
+
     @Step("Üyelik kaydı için geçersiz e-mail girildiğinde hata alınır.")
-    public String getEmailSymbolErrorMessage(){
+    public String getEmailErrorMessage() {
         String text = driver.findElement(By.id(":r2:-helper-text")).getText();
         return text;
     }
 
+    @Step("Varolan  bir kullanıcı ile kayıt olma işlemi yapıldığında hata alınır.")
+    public String getExistingUserErrorMessage() {
+        String text = driver.findElement(By.cssSelector("[class='MuiAlert-message css-1xsto0d']")).getText();
+        return text;
+    }
 }
