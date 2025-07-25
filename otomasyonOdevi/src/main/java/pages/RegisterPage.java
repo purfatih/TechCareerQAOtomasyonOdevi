@@ -99,9 +99,24 @@ public class RegisterPage extends BaseMethods {
         String text = driver.findElement(By.id(":r4:-helper-text")).getText();
         return text;
     }
+    @Step("Şifre tekrar girilmediğinde hata alınır.")
+    public String getRepeatPasswordError() {
+        String text = driver.findElement(By.id(":r5:-helper-text")).getText();
+        return text;
+    }
     @Step("Telefon numarası hatalı formatta girilir ise hata alınır.")
     public String getPhoneNumberError() {
         String text = driver.findElement(By.id(":r3:-helper-text")).getText();
+        return text;
+    }
+    @Step("Rıza metni ve hizmet şartları alanı doldurulmadığında hata alınır.")
+    public String getPoliciesError() {
+        String text = driver.findElement(By.cssSelector("[class='MuiFormHelperText-root Mui-error css-lriew9']")).getText();
+        return text;
+    }
+    @Step("Şifre tekrar alanı boş bırakılır ise inputun üstteki label'i 'Şifre' olarak kalmalıdır. Farklı bir metin olur ise hata alınır.")
+    public String getInputLabelError() {
+        String text = driver.findElement(By.id(":r5:-label")).getText();
         return text;
     }
 }

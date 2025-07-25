@@ -59,7 +59,7 @@ public class RegisterTests extends BaseMethods {
         baseTests.assertEquals(registerPage.getExistingUserErrorMessage(), "Bu e-posta veya telefon numarası ile daha önce hesap oluşturulmuş!");
     }
     @Test(description = "TC005 - E-posta alanına emoji ve özel semboller girildiğinde sistemin geçersiz e-mail uyarısı vermesi test edilir.")
-    public void CheckEmailWithSymbol() {
+    public void EmailWithSymbolCheck() {
         registerPage.sendKeysRegisterName(registerName)
                 .sendKeysRegisterSurname(registerSurname)
                 .sendKeysRegisterEmail("automation#@gmail.com")
@@ -156,5 +156,58 @@ public class RegisterTests extends BaseMethods {
                 .clickRegisterButton();
         baseTests.sleep(3000);
         baseTests.assertEquals(registerPage.getPasswordError(), "Şifre en az 6 karakter olmalıdır!");
+    }
+    @Test(description = "TC012 - Şifre tekrar edilmediğinde alınan hata test edilir.")
+    public void PasswordRepeatCheck() {
+        registerPage.sendKeysRegisterName(registerName)
+                .sendKeysRegisterSurname(registerSurname)
+                .sendKeysRegisterEmail(registerEmail)
+                .sendKeysRegisterPhone(registerPhone)
+                .sendKeysRegisterPassword(registerPassword)
+                .sendKeysRegisterRepeatPassword("")
+                .sendKeysRegisterAcceptConsent()
+                .sendKeysRegisterAcceptPolicies()
+                .clickRegisterButton();
+        baseTests.sleep(3000);
+        baseTests.assertEquals(registerPage.getRepeatPasswordError(), "Şifreyi tekrar giriniz!");
+    }
+    @Test(description = "TC0013 - E-posta alanına emoji ve özel semboller girildiğinde sistemin geçersiz e-mail uyarısı vermesi test edilir.")
+    public void EmptyPoliciesCheck() {
+        registerPage.sendKeysRegisterName(registerName)
+                .sendKeysRegisterSurname(registerSurname)
+                .sendKeysRegisterEmail(registerEmail)
+                .sendKeysRegisterPhone(registerPhone)
+                .sendKeysRegisterPassword(registerPassword)
+                .sendKeysRegisterRepeatPassword(registerRepeatPassword)
+                .clickRegisterButton();
+        baseTests.sleep(3000);
+        baseTests.assertEquals(registerPage.getPoliciesError(), "Hizmet Şartlarını ve Gizlilik Politikasını kabul etmelisiniz.");
+    }
+    @Test(description = "TC014 - Bilgiler doldurulmadan Hesap Oluştur butonuna basınca uyarı çıkması test edilir..")
+    public void EmptyFieldsErrorCheck() {
+        registerPage.clickRegisterButton();
+        baseTests.sleep(3000);
+        baseTests.assertEquals(registerPage.getPasswordError(), "Şifre en az 6 karakter olmalıdır!");
+        baseTests.assertEquals(registerPage.getRepeatPasswordError(), "Şifreyi tekrar giriniz!");
+        baseTests.assertEquals(registerPage.getPhoneNumberError(), "Telefon numarası alanı zorunludur!");
+        baseTests.assertEquals(registerPage.getEmailErrorMessage(), "Email alanı zorunludur!");
+        baseTests.assertEquals(registerPage.getNameErrorMessage(), "İsim alanı zorunludur!");
+        baseTests.assertEquals(registerPage.getSurnameErrorMessage(), "Soyisim alanı zorunludur!");
+        baseTests.assertEquals(registerPage.getPoliciesError(), "Hizmet Şartlarını ve Gizlilik Politikasını kabul etmelisiniz.");
+    }
+    @Test(description = "TC011 - Şifrenin en az 6 karakter olma kuralı test edilir.")
+    //alttaki test case'inde bug bulunmuştur. bu nedenle test fail vermektedir.
+    public void EmptyPasswordRepeatInputErrorCheck() {
+        registerPage.sendKeysRegisterName(registerName)
+                .sendKeysRegisterSurname(registerSurname)
+                .sendKeysRegisterEmail(registerEmail)
+                .sendKeysRegisterPhone(registerPhone)
+                .sendKeysRegisterPassword("12345")
+                .sendKeysRegisterRepeatPassword("")
+                .sendKeysRegisterAcceptConsent()
+                .sendKeysRegisterAcceptPolicies()
+                .clickRegisterButton();
+        baseTests.sleep(3000);
+        baseTests.assertEquals(registerPage.getInputLabelError(), "Şifre");
     }
 }
