@@ -18,9 +18,15 @@ public class RegisterTests extends BaseMethods {
                 .sendKeysRegisterAcceptConsent()
                 .sendKeysRegisterAcceptPolicies()
                 .clickRegisterButton();
-        baseTests.sleep(5000);
+        baseTests.sleep(3000);
         baseTests.assertEquals(driver.getCurrentUrl(), "https://qrsofra.com/dashboard");
 
 
+    }
+    @Test
+    public void CheckLogin(){
+        registerPage.clickLoginButton();
+        baseTests.sleep(3000);
+        baseTests.assertEquals(driver.getCurrentUrl(), "https://qrsofra.com/auth/jwt/sign-in");
     }
 }

@@ -61,4 +61,9 @@ public class RegisterPage extends BaseMethods {
         driver.findElement(By.id(":r6:")).click();
         return this;
     }
+    @Step("'Giriş Yap' butonuna tıklanarak, ilgili sayfaya yönlendirme yapıp yapmadığı kontrol edilir.")
+    public RegisterPage clickLoginButton() {
+        driver.findElement(By.cssSelector("[class='MuiTypography-root MuiTypography-subtitle2 MuiLink-root MuiLink-underlineHover css-z8j0pw']")).click();
+        return this;
+    }
 }
