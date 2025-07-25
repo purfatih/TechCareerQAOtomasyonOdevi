@@ -56,7 +56,7 @@ public class RegisterPage extends BaseMethods {
         return this;
     }
 
-    @Step("Üyelik kaydı için kayıt ol butonuna tıklanır.")
+    @Step("Üyelik kaydı için Hesap Oluştur butonuna tıklanır.")
     public RegisterPage clickRegisterButton() {
         driver.findElement(By.id(":r6:")).click();
         return this;
@@ -66,4 +66,10 @@ public class RegisterPage extends BaseMethods {
         driver.findElement(By.cssSelector("[class='MuiTypography-root MuiTypography-subtitle2 MuiLink-root MuiLink-underlineHover css-z8j0pw']")).click();
         return this;
     }
+    @Step("Üyelik kaydı için geçersiz e-mail girildiğinde hata alınır.")
+    public String getEmailSymbolErrorMessage(){
+        String text = driver.findElement(By.id(":r2:-helper-text")).getText();
+        return text;
+    }
+
 }
